@@ -8,8 +8,7 @@ int main()
 	MyString teste("4565");
 	MyString result = test + teste;
 
-	result.Print();
-	std::cout << test;
+	std::cout << result;
 	return 0;
 }
     
