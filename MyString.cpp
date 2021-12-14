@@ -1,7 +1,7 @@
 #include "MyString.h"
 
 
-//Конструктор по умолчанию
+//Default Constructor
 MyString::MyString()
 {
 	str = nullptr;
@@ -12,31 +12,43 @@ MyString::MyString(const char* string)
 {
 	length = (int)CountString(string);
 	this->str = new char[length + 1];
+
 	for (int i = 0; i < length; i++) {
 		this->str[i] = string[i];
 	}
+
 	this->str[length] = '\0';
 }
 
-//Считаем строки
-size_t MyString::CountString(const char* string) {
+//Read char length
+size_t MyString::CountString(const char* string)
+{
 	size_t result = 0;
-	while (*(string)++) { result++; }
+
+	while (*(string)++) {
+		result++;
+	}
+
 	return result;
 }
-//Реализация присваивания
+
+//Assignare operator
 MyString& MyString::operator = (const MyString& other)
 {
 	if (this->str != nullptr) delete[] str;
+
 	length = (int)CountString(other.str);
 	this->str = new char[length + 1];
+
 	for (int i = 0; i < length; i++) {
 		this->str[i] = other.str[i];
 	}
+
 	this->str[length] = '\0';
 	return *this;
 }
-//Реализация конкантенации
+
+//String concatenation
 MyString MyString::operator + (const MyString& other)
 {
 	MyString newStr;
@@ -50,6 +62,7 @@ MyString MyString::operator + (const MyString& other)
 	for (; i < thisLength; i++) {
 		newStr.str[i] = this->str[i];
 	}
+
 	for (int j = 0; j < otherLengh; j++, i++) {
 		newStr.str[i] = other.str[j];
 	}
@@ -57,32 +70,30 @@ MyString MyString::operator + (const MyString& other)
 
 	return newStr;
 }
-//Конструктор копирования 
+
+//Copy Construction
 MyString::MyString(const MyString& other)
 {
 	length = (int)CountString(other.str);
 	this->str = new char[length + 1];
+
 	for (int i = 0; i < length; i++) {
 		this->str[i] = other.str[i];
 	}
+
 	this->str[length] = '\0';
 }
 
-//Оператор для вывода потока в консоль
+//Method for output std::cout
 std::ostream& operator << (std::ostream& out, const MyString& other)
 {
 	out << other.str;
 	return out;
 }
 
-
-//Освобождение области памяти, на которую указывает указатель str в куче
+//Delete array 
 MyString::~MyString()
 {
 	delete[] this->str;
 }
 
-//Удалить потом
-void MyString::Print() {
-	std::cout << str;
-}
