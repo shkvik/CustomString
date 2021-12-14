@@ -7,7 +7,7 @@ MyString::MyString()
 	str = nullptr;
 }
 
-//Конструктор с аргументом для 
+//Constructor for take const char[]
 MyString::MyString(const char* string)
 {
 	length = (int)CountString(string);
